@@ -17,6 +17,15 @@ function movelines() {
     }
 }
 
+function movecar(car) {
+    let mycar = car.getBoundingClientRect();
+        if(mycar.y >= roadloc.height-75){
+            return 1
+        }
+        mycar.y += 1;
+        car.style.top = mycar.y+"px";
+    }
+
 function movehits(car) {
     let hits = document.querySelectorAll(".hits");
     hits.forEach(element => {
@@ -64,6 +73,7 @@ function playgame() {
     if(player.start == true){
         let car = document.querySelector(".car");
         movelines();
+        movecar(car);
         movehits(car);
         document.addEventListener("keydown", (e) => {
             keys[e.key] = true
@@ -86,7 +96,7 @@ function playgame() {
         }
         window.requestAnimationFrame(playgame)
         document.querySelector(".score").innerText = `Score: ${score}
-        ❤ ${Math.round(count/5)}`;
+        💖 ${Math.round(count/5)}`;
         if(Math.round(count/5) <= 0){
             endGame();
         }
